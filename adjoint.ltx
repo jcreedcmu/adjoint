@@ -1,0 +1,142 @@
+\documentclass{article}
+\input{macros}
+
+% \usepackage{fullpage}
+
+\begin{document}
+\title{Adjoint Logic over a 2-Category of Worlds}
+\author{Jason Reed}
+\maketitle
+\def\rok{\mathop{\mathrm{ok}}\nolimits}
+\def\lol{\multimap}
+\def\trov{\triangleright}
+
+\section{Syntax}
+Fix a 2-category of worlds (or ``judgmental levels'') with objects $p,q,\ldots$, morphisms $\alpha,\beta,\ldots$, and 2-cells $e,\ldots$. We're going to give a proof theory of the language
+$$\begin{tabular}{rl@{\ }l@{\ \ }l}
+Positive Propositions &$P$&$::=$&$ F_\alpha P \celse \dns N \celse a^+ \celse  P \tensor P \celse 1 \celse P \oplus P \celse 0 $\\
+Negative Propositions &$N$&$::=$&$ U_\alpha N \celse \ups P \celse a^- \celse  P \lol N \celse N \amp N \celse \top $\\
+\end{tabular}$$
+first via translation into focused first-order logic, then directly by giving proof rules.
+
+\section{World-typing}
+The translation needs some extra syntax to describe the first-order individuals involved.
+$$\begin{tabular}{rl@{\ }l@{\ \ }l}
+Resources&$r$&$::=$&$ F_\alpha r\celse \rho \celse r \tensor r \celse 1$\\
+Frames&$f$&$::=$&$ U_\alpha f\celse \phi\celse r \lol f $\\
+Structures&$s$&$::=$&$ r \trov f $\\
+\end{tabular}$$
+The subscript $\alpha$ ranges over all morphisms in the 2-category.
+The symbols $\rho$ and $\phi$ are metavariables for resource variables
+and frame variables respectively. Every resource and frame is `located
+at' a `world', i.e. an object in the underlying 2-category of worlds.
+We can make a typing judgment to capture the appropriate invariant.
+$\Delta$ is a context of assumptions $\rho : p$ and $\phi : p$ about
+resource and frame variables. The intuition behind $\Delta \prov r :
+p$ and $\Delta \prov f : p$ is that $r$ and $f$ are like a zipper with
+a filler, together describing $r \trov f$, the structure of the
+sequent. The invariant is just that the `type' of the zipper's hole,
+the object of the 2-category at which we've split it in half, must
+match the data filling that hole.
+$$\begin{prooftree}
+  \justifies
+  \Delta, \rho : p \prov \rho : p
+\end{prooftree}
+\qquad
+\begin{prooftree}
+  \justifies
+  \Delta, \phi : p \prov \phi : p
+\end{prooftree}
+$$
+$$\begin{prooftree}
+  \Delta \prov r : p\qquad \alpha : p \to q
+  \justifies
+  \Delta \prov F_\alpha r : q
+\end{prooftree}
+\qquad
+\begin{prooftree}
+  \Delta \prov f : q\qquad \alpha : p \to q
+  \justifies
+  \Delta \prov U_\alpha f : p
+\end{prooftree}
+$$
+$$\begin{prooftree}
+  \Delta \prov r_1:p \qquad\Delta \prov r_2 : p
+  \justifies
+  \Delta \prov r_1 \tensor r_2: p
+\end{prooftree}
+\qquad
+\begin{prooftree}
+  \justifies
+  \Delta \prov 1: p
+\end{prooftree}
+\qquad
+\begin{prooftree}
+  \Delta \prov r:p \qquad\Delta \prov f : p
+  \justifies
+  \Delta \prov r \lol f: p
+\end{prooftree}
+$$
+$$
+\begin{prooftree}
+  \Delta \prov r:p \qquad\Delta \prov f : p
+  \justifies
+  \Delta \prov r \trov f \rok
+\end{prooftree}
+$$ It may look like resources and frames recapitulate most of the
+syntax of propositions, but it's critical that they lack shifts (less
+critical, but true, is the fact that they lack additives).
+
+\section{Translation}
+The target language is focused first order intuitionistic logic,
+with two fixed atomic propositions $b^+$ and $\#^-$. The
+translation consists of two functions: $N^f$ takes a negative
+proposition and a frame, and $P^r$ takes a positive proposition and a
+resource, and both yield a target-language positive proposition,
+regardless of the polarity of the input. They are defined in
+Figure~\ref{figure.translation}.
+
+
+
+\begin{figure}
+$$\begin{tabular}{ccc}
+\toprule
+$N$&$ N^f$\\
+\midrule
+$U_\alpha N$&$ \exists \phi . N^\phi  \land f = U_\alpha \phi $\\
+$P \lol N$&$ \exists \rho . P^\rho \land \exists \phi . N^\phi \land f = \rho \lol \phi $\\
+$N_1 \amp N_2$&$N_1^f\lor N_2^f$\\
+$\top$&$0$\\
+$\ups P$&$ \dns \forall\rho .   P^\rho \imp \#^-(\rho \trov f) $\\
+$ a^-$&$b^+(a^-, f) $\\
+\bottomrule
+\end{tabular}$$
+
+$$\begin{tabular}{ccc}
+\toprule
+$P$&$ P^r$\\
+\midrule
+$F_\alpha P$&$ \exists \rho . P^\rho  \land r = F_\alpha \rho $\\
+$P_1 \tensor P_2$&$ \exists \rho_1 . P_1^{\rho_1} \land  \exists \rho_2 . P_2^{\rho_2}\land r = \rho_1 \tensor \rho_2$\\
+$P_1 \oplus P_2$&$P_1^r\lor P_2^r$\\
+$1$&$r = 1$\\
+$0$&$0$\\
+$\dns N$&$ \dns \forall\phi .   N^\phi \imp \#^-(r \trov \phi) $\\
+$ a^+$&$b^+(a^+, r) $\\
+\bottomrule
+\end{tabular}$$
+\caption{Translation}
+\label{figure.translation}
+\end{figure}
+
+
+
+
+\input{foc-rules}
+
+
+
+
+
+
+\end{document}
