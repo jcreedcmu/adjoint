@@ -1,0 +1,63 @@
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{wasysym}
+
+
+
+
+\def\jcreed#1{{\color{note}[#1 -jcreed]}}
+\def\xxx#1{{\color{note}[XXX #1]}}
+
+
+\input prooftree
+
+\def\adjust{\downharpoonright}
+\def\prov{\vdash}
+\def\imp{\Rightarrow}
+\def\cqed{\hskip2mm{\vrule width .5em height .5em depth 0em}} % at the end of a |P.
+\def\celse{\mathrel |}
+
+\def\tensor{\otimes}
+\def\amp{\mathrel{\&}}
+\def\batom{\mathbf {A}}
+\def\rvalid{\mathop{\mathsf{valid}}}
+\def\rposs{\mathop{\mathsf{poss}}}
+
+\def\prequiv{\dashv\vdash}
+
+
+\def\forn{{\mathsf U}}
+\def\forv{{\mathsf V}}
+
+\def\erule#1#2{
+\begin{prooftree}
+#1 \justifies #2
+\end{prooftree}}
+
+\def\rx#1{\overrightarrow{#1}}
+\def\lx#1{\overleftarrow{#1}}
+%\def\rxx#1{\overrightarrow{\overline{#1}}}
+%\def\lxx#1{\overleftarrow{\overline{#1}}}
+\def\rxx#1{\ups\overrightarrow{#1}}
+\def\lxx#1{\dns\overleftarrow{#1}}
+
+\def\dia{\Diamond}
+\def\bx{{\Square}}
+\def\poss{{\star}}
+\def\ups{{\uparrow}}
+\def\dns{{\downarrow}}
+
+\def\susp#1{\langle {#1} \rangle}
+
+
+\def\gap{\hskip 1em\hfil\hskip 1em}
+\def\sgap{\hskip 0.3em\hfil\hskip 0.3em}
+\def\provf{\prov\!\!\!\!{}_{{}_f}\,}
+\def\rctx{\mathrm{ctx}}
+\def\evto{\rightsquigarrow}
+\def\D{{\cal D}}
+\def\E{{\cal E}}
+\newcommand\djust{\justifies\thickness 0pt}
+\def\trhs{\susp{\#(x,\phi)}}
+\def\srhs{\susp{\#(s,\phi)}}
