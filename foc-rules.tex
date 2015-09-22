@@ -1,0 +1,172 @@
+\def\provp{\prov_p}
+\def\provq{\prov_q}
+\begin{figure}
+\begin{center}
+\footnotesize
+\setstretch{4}
+$
+\erule
+{\Gamma; P^{1_p} \provp  N \using {\lol}R}
+{\Gamma; \cdot \provp P \lol N}
+$
+\gap
+$
+\erule
+{\Gamma_1 \provq [P] \qquad \Gamma_2[N]^\alpha \provp Q \using {\lol}L}
+{\alpha \circ \Gamma_1,\Gamma_2 [P \lol N]^\alpha \provp Q}
+$
+\gap
+$
+\erule
+{\Gamma;\cdot\provp N_1  \qquad \Gamma;\cdot\provp N_2 \using {\amp}R}
+{\Gamma;\cdot\provp N_1\amp N_2 }
+$
+\gap
+$
+\erule
+{\Gamma [N_i]^\alpha \provp Q \using {\amp}L}
+{\Gamma [N_1 \amp N_2]^\alpha \provp Q}
+$
+\gap
+$
+\erule
+{\Gamma_1 \provp [P_1] \qquad \Gamma_2 \provp [P_2]\using {\tensor}R}
+{\Gamma_1, \Gamma_2  \provp [P_1 \tensor P_2]}
+$
+\gap
+$
+\erule
+{\Gamma; P_1^\alpha, P_2^\alpha, \Omega \provp R \using {\tensor}L}
+{\Gamma; (P_1\tensor P_2)^\alpha, \Omega  \provp  R}
+$
+\gap
+$
+\erule
+{\Gamma \provp [P_i] \using {\oplus}R_i}
+{\Gamma  \provp [P_1 \oplus P_2]}
+$
+\gap
+$
+\erule
+{\Gamma; P_1^\alpha, \Omega \provp R \qquad \Gamma; P_2^\alpha, \Omega \provp R\using {\oplus}L}
+{\Gamma; (P_1\oplus P_2)^\alpha, \Omega \provp R}
+$
+\gap
+$
+\erule
+{\using {\top}R}
+{\Gamma;\cdot  \provp \top}
+$
+\gap
+$
+\erule
+{\using {1}R}
+{\cdot  \provp [1]}
+$
+\gap
+$
+\erule
+{\Gamma; \Omega \provp R \using {1}L}
+{\Gamma; 1^\alpha, \Omega \provp R}
+$
+\gap
+$
+\erule
+{\using {0}L}
+{\Gamma; 0^\alpha, \Omega \provp R}
+$
+\gap
+$
+\erule
+{\Gamma;\cdot \provp N\using {\dns}R}
+{\Gamma  \provp [\dns N]}
+$
+\gap
+$
+\erule
+{\Gamma, N^\alpha; \Omega \provp R \using {\dns}L}
+{\Gamma; \dns N^\alpha,  \Omega \provp R}
+$
+\gap
+$
+\erule
+{\Gamma; \cdot \provp P\using {\ups}R}
+{\Gamma; \cdot  \provp \ups P}
+$
+\gap
+$
+\erule
+{\Gamma; P^\alpha\provp Q \using {\ups}L}
+{\Gamma[\ups P]^\alpha \provp Q}
+$
+\gap
+$
+\erule
+{1_p \imp \alpha \using {a^+}R}
+{\Gamma, \susp{a^+}^\alpha  \provp [a^+ ]}
+$
+\gap
+$
+\erule
+{\Gamma, \susp{a^+}^\alpha; \Omega\provp R \using {a^+}L}
+{\Gamma;  (a^+)^\alpha, \Omega  \provp R}
+$
+\gap
+$
+\erule
+{\Gamma; \cdot \provp \susp{a^-}\using {a^-}R}
+{\Gamma; \cdot  \provp a^-}
+$
+\gap
+$
+\erule
+{1_p \imp \alpha \using {a^-}L }
+{\Gamma[a^-]^\alpha \provp \susp{a^-}}
+$
+\break
+$
+\erule
+{\Gamma \provp [P]\using {foc}R}
+{\Gamma;\cdot  \provp P}
+$
+\gap
+$
+\erule
+{\Gamma[N]^\alpha \provp Q\using {foc}L}
+{\Gamma,N^\alpha;\cdot  \provp Q}
+$
+\break
+$
+\erule
+{\Gamma \prov_r [P]\using {F}R}
+{\beta \circ \Gamma  \provq [F_\beta P]}
+$
+\gap
+$
+\erule
+{\Gamma; P^{\alpha\beta}, \Omega  \provp R\using {F}L}
+{\Gamma;(F_\beta P)^\alpha, \Omega  \provp R}
+$
+\break
+$
+\erule
+{ \beta \circ \Gamma;\cdot\provq N \using {U}R}
+{\Gamma;\cdot\prov_r U_\beta N }
+$
+\gap
+$
+\erule
+{\Gamma [N]^\alpha \provp Q \using {U}L}
+{\Gamma [U_\beta N]^{\alpha\beta} \provp Q}
+$
+\end{center}
+$$
+\gap
+\erule
+{\Gamma_1 \prov_q A \qquad \Gamma_2, A^\alpha \prov_p C\using cut}
+{\alpha \circ \Gamma_1, \Gamma_2 \prov_p C}
+$$
+$$\alpha : q \to p$$
+$$\beta : r \to q$$
+\caption{Focused Linear Logic Proof Rules \label{foc-rules}}
+\end{figure}
