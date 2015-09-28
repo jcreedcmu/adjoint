@@ -1,5 +1,6 @@
 \documentclass{article}
 \input{macros}
+\input theorem
 
 % \usepackage{fullpage}
 
@@ -10,6 +11,10 @@
 \def\rok{\mathop{\mathrm{ok}}\nolimits}
 \def\lol{\multimap}
 \def\trov{\triangleright}
+\def\provp{\prov_p}
+\def\provq{\prov_q}
+\def\Ups{{\Uparrow}}
+\def\Dns{{\Downarrow}}
 
 \section{Syntax}
 Fix a 2-category of worlds (or ``judgmental levels'') with objects $p,q,\ldots$, morphisms $\alpha,\beta,\ldots$, and 2-cells $e,\ldots$. We're going to give a proof theory of the language
@@ -146,6 +151,28 @@ $$
 %% $$\beta : r \to q$$
 
 
+Define $\Omega^{\vec r}$ by
+$$\cdot ^ \cdot = \cdot \qquad
+(P, \Omega)\cdot (r, \vec r)  = P^r, \Omega^{\vec r}
+$$
+
+Say $\Xi$ is a {\em garbage context for $s$} if it consists only of propositions $\Ups_\phi Q$
+and $\Dns_\rho H$ for $\phi \not\in s$ and $\rho \not\in s$.
+
+When $\vec \rho = (\rho_1,\ldots, \rho_n)$, we write $\tensor(\vec \rho)$ for $\rho_1 \tensor \cdots\tensor \rho_n$.
+
+\begin{theorem}[Correctness of Translation]
+Suppose $\Xi$ is a garbage context for $x$. Then the following pairs of sequents have isomorphic sets of proofs:
+
+\begin{tabular}{l@{\quad}l@{\quad}c@{\quad}l}
+1.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma, \Ups_\phi Q ; \Omega^{\vec\rho_0} \prov\#(\tensor(\vec\rho\vec\rho_0) \trov \phi)) $&$\cong$&$ \Gamma; \Omega \provp Q$\\
+2.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma ; \Omega^{\vec\rho_0}, N^\phi \prov \#(\tensor(\vec\rho\vec\rho_0) \trov \phi)$&$\cong$&$ \Gamma; \Omega \provp N$\\
+3.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma,  \Ups_\phi Q \prov [N^{\tensor(\vec \rho) \lol \phi}]  $&$\cong$&$ \Gamma[N] \provp Q$\\
+4.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma \prov [ P^{\tensor(\vec\rho)}]$&$\cong$&$ \Gamma \provp [P]$\\
+\end{tabular}
+
+
+\end{theorem}
 
 
 \end{document}
