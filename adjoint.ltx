@@ -21,8 +21,20 @@ Fix a 2-category of worlds (or ``judgmental levels'') with objects $p,q,\ldots$,
 $$\begin{tabular}{rl@{\ }l@{\ \ }l}
 Positive Propositions &$P$&$::=$&$ F_\alpha P \celse \dns N \celse a^+ \celse  P \tensor P \celse 1 \celse P \oplus P \celse 0 $\\
 Negative Propositions &$N$&$::=$&$ U_\alpha N \celse \ups P \celse a^- \celse  P \lol N \celse N \amp N \celse \top $\\
+Positive Contexts&$\Omega$&$::=$&$\cdot \celse P::\alpha, \Omega$\\
+Negative Contexts&$\Gamma$&$::=$&$\cdot \celse \Gamma, H::\alpha$\\
+Linear Hypotheses&$H$&$::=$&$N \celse \susp{a^+}$\\
+Stable Conclusions&$Q$&$::=$&$P \celse \susp{a^-}$\\
+Conclusions&$R$&$::=$&$N \celse Q$\\
 \end{tabular}$$
 first via translation into focused first-order logic, then directly by giving proof rules.
+
+The three judgments of the focused proof theory are
+$$\begin{tabular}{rl}
+Inversion&$\Gamma;\Omega\provp R$\\
+Right Focus&$\Gamma\provp [P]$\\
+Left Focus&$\Gamma[N::\alpha]\provp Q$\\
+\end{tabular}$$
 
 \section{World-typing}
 The translation needs some extra syntax to describe the first-order individuals involved.
@@ -141,20 +153,39 @@ $ a^+$&$b^+(a^+, r) $\\
 \input{foc-rules}
 
 \section{Metatheory}
+
+\subsection{Cut}
 $$
 \erule
-{\Gamma_1 \prov_q A \qquad \Gamma_2, A^\alpha \prov_p C\using cut}
+{\Gamma_1 \prov_q A \qquad \Gamma_2, A::\alpha \prov_p C\using cut}
 {\alpha \circ \Gamma_1, \Gamma_2 \prov_p C}
 $$
 
+
 %% $$\alpha : q \to p$$
 %% $$\beta : r \to q$$
+\subsection{Correspondence}
+
+Here are a few further definitions so that we can state the adequacy of the translation:
+For any vector $\vec r$ of resources, define $ \Dns_{\vec r}\Gamma $
+$$\Dns_\cdot \cdot = \cdot
+\qquad \Dns_{\vec r, r} (\Gamma, H :: \alpha)  =  \Dns_{\vec r}\Gamma, (\Dns_r H)
+$$
+and $\Dns_r H$ by
+$$\Dns_r N = \forn^r \phi .  N^\phi \qquad
+ \Dns_r \susp{a^+} = \susp{b^+(a^+, r)}$$
+Define $\Ups_f Q$ by
+$$
+ \Ups_f P =  \forn^f \rho .  P^\rho
+\qquad \Ups_f \susp{a^-} = \susp{b^+(a^-,f)}
+$$
 
 
 Define $\Omega^{\vec r}$ by
 $$\cdot ^ \cdot = \cdot \qquad
-(P, \Omega)\cdot (r, \vec r)  = P^r, \Omega^{\vec r}
+(P :: \alpha, \Omega)\cdot (r, \vec r)  = P^r, \Omega^{\vec r}
 $$
+
 
 Say $\Xi$ is a {\em garbage context for $s$} if it consists only of propositions $\Ups_\phi Q$
 and $\Dns_\rho H$ for $\phi \not\in s$ and $\rho \not\in s$.
@@ -165,10 +196,10 @@ When $\vec \rho = (\rho_1,\ldots, \rho_n)$, we write $\tensor(\vec \rho)$ for $\
 Suppose $\Xi$ is a garbage context for $x$. Then the following pairs of sequents have isomorphic sets of proofs:
 
 \begin{tabular}{l@{\quad}l@{\quad}c@{\quad}l}
-1.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma, \Ups_\phi Q ; \Omega^{\vec\rho_0} \prov\#(\tensor(\vec\rho\vec\rho_0) \trov \phi)) $&$\cong$&$ \Gamma; \Omega \provp Q$\\
-2.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma ; \Omega^{\vec\rho_0}, N^\phi \prov \#(\tensor(\vec\rho\vec\rho_0) \trov \phi)$&$\cong$&$ \Gamma; \Omega \provp N$\\
-3.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma,  \Ups_\phi Q \prov [N^{\tensor(\vec \rho) \lol \phi}]  $&$\cong$&$ \Gamma[N] \provp Q$\\
-4.&$\Xi, \Dns \Delta, \Dns_{\vec \rho}\Gamma \prov [ P^{\tensor(\vec\rho)}]$&$\cong$&$ \Gamma \provp [P]$\\
+1.&$\Xi, \Dns_{\vec \rho}\Gamma, \Ups_\phi Q ; \Omega^{\vec\rho_0} \prov\#(\tensor(\vec\rho\vec\rho_0) \trov \phi)) $&$\cong$&$ \Gamma; \Omega \provp Q$\\
+2.&$\Xi, \Dns_{\vec \rho}\Gamma ; \Omega^{\vec\rho_0}, N^\phi \prov \#(\tensor(\vec\rho\vec\rho_0) \trov \phi)$&$\cong$&$ \Gamma; \Omega \provp N$\\
+3.&$\Xi, \Dns_{\vec \rho}\Gamma,  \Ups_\phi Q \prov [N^{\tensor(\vec \rho) \lol \phi}]  $&$\cong$&$ \Gamma[N] \provp Q$\\
+4.&$\Xi, \Dns_{\vec \rho}\Gamma \prov [ P^{\tensor(\vec\rho)}]$&$\cong$&$ \Gamma \provp [P]$\\
 \end{tabular}
 
 
