@@ -154,6 +154,17 @@ $ a^+$&$b^+(a^+, r) $\\
 
 \section{Metatheory}
 
+\subsection{Intended Invariants of Judgments}
+
+We say $\Gamma : p$ when every $H :: \alpha\in \Gamma$ has $\alpha : p$.
+We say $\Omega : p$ when every $P :: \alpha \in \Omega$ has $\alpha : p$.
+We can only consider $\Gamma;\Omega\provp R$ when $\Gamma : p$ and $\Omega : p$.
+We can only consider $\Gamma\provp [P]$ when $\Gamma : p$.
+We can only consider $\Gamma[N::\alpha]\provp Q$ when $\Gamma : p$ and $\alpha : p$.
+
+
+
+
 \subsection{Cut}
 $$
 \erule
